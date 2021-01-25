@@ -2,10 +2,10 @@ import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
 import CardActionArea from "@material-ui/core/CardActionArea";
-import CardActions from "@material-ui/core/CardActions";
+
 import CardContent from "@material-ui/core/CardContent";
 import CardMedia from "@material-ui/core/CardMedia";
-import Button from "@material-ui/core/Button";
+
 import Typography from "@material-ui/core/Typography";
 
 const useStyles = makeStyles({
@@ -22,7 +22,7 @@ const useStyles = makeStyles({
   },
 });
 
-export const ProductCard = () => {
+export const ProductCard = ({ title, price, img, condition, stock }) => {
   const classes = useStyles();
 
   return (
@@ -30,18 +30,19 @@ export const ProductCard = () => {
       <CardActionArea>
         <CardMedia
           className={classes.media}
-          image="/static/images/cards/contemplative-reptile.jpg"
+          image={img}
           title="Contemplative Reptile"
         />
         <CardContent>
           <Typography gutterBottom variant="h5" component="h2" align="center">
-            Titulo
+            {title}
+          </Typography>
+          <hr />
+          <Typography gutterBottom variant="h5" component="h2" align="center">
+            {`Valor: ${price}  $`}
           </Typography>
           <Typography gutterBottom variant="h5" component="h2" align="center">
-            Precio
-          </Typography>
-          <Typography gutterBottom variant="h5" component="h2" align="center">
-            Condicion
+            {`Estado (${condition})`}
           </Typography>
           <Typography
             variant="body2"
@@ -49,7 +50,7 @@ export const ProductCard = () => {
             component="p"
             align="center"
           >
-            Stock
+            {`Cantidad disponible (${stock})`}
           </Typography>
         </CardContent>
       </CardActionArea>
