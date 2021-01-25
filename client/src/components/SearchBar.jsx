@@ -1,16 +1,21 @@
 import React from "react";
-import AppBar from "@material-ui/core/AppBar";
-import Toolbar from "@material-ui/core/Toolbar";
 
-import Typography from "@material-ui/core/Typography";
-import InputBase from "@material-ui/core/InputBase";
+import {
+  Button,
+  AppBar,
+  Toolbar,
+  Typography,
+  InputBase,
+  Checkbox,
+} from "@material-ui/core";
+
 import { fade, makeStyles } from "@material-ui/core/styles";
-
 import SearchIcon from "@material-ui/icons/Search";
 
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
+    marginBottom: 30,
   },
   menuButton: {
     marginRight: theme.spacing(2),
@@ -61,10 +66,14 @@ const useStyles = makeStyles((theme) => ({
       },
     },
   },
+  Button: {
+    marginRight: 12,
+  },
 }));
 
-export const SearchBar = () => {
+export const SearchBar = ({ setKeyword, products }) => {
   const classes = useStyles();
+  // console.log(products);
 
   return (
     <div className={classes.root}>
@@ -73,6 +82,21 @@ export const SearchBar = () => {
           <Typography className={classes.title} variant="h6" noWrap>
             Taller de Recuperacion
           </Typography>
+          <div className="d-flex justify-content-between">
+            <Typography>
+              Menor Precio <Checkbox id="menor" />
+            </Typography>
+
+            <Typography>
+              Mayor Precio <Checkbox id="mayor" />
+            </Typography>
+            <Typography>
+              Nuevo <Checkbox id="nuevo" />
+            </Typography>
+            <Typography>
+              Usado <Checkbox id="usado" />
+            </Typography>
+          </div>
           <div className={classes.search}>
             <div className={classes.searchIcon}>
               <SearchIcon />
@@ -84,6 +108,7 @@ export const SearchBar = () => {
                 input: classes.inputInput,
               }}
               inputProps={{ "aria-label": "search" }}
+              onChange={(e) => setKeyword(e.target.value)}
             />
           </div>
         </Toolbar>
