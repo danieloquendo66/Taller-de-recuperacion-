@@ -1,18 +1,16 @@
 import React from "react";
+import { useDispatch } from "react-redux";
 
-import {
-  Button,
-  AppBar,
-  Toolbar,
-  Typography,
-  InputBase,
-  Checkbox,
-} from "@material-ui/core";
-
+import { AppBar, Toolbar, Typography, InputBase } from "@material-ui/core";
+import { filtrarProductos } from "../redux/actions";
 import { fade, makeStyles } from "@material-ui/core/styles";
 import SearchIcon from "@material-ui/icons/Search";
+import { NUEVO, USADO, MAYOR, MENOR } from "../redux/types";
 
 const useStyles = makeStyles((theme) => ({
+  inputFilter: {
+    marginRight: 40,
+  },
   root: {
     flexGrow: 1,
     marginBottom: 30,
@@ -73,6 +71,7 @@ const useStyles = makeStyles((theme) => ({
 
 export const SearchBar = ({ setKeyword, products }) => {
   const classes = useStyles();
+  const dispatch = useDispatch();
   // console.log(products);
 
   return (
@@ -84,17 +83,41 @@ export const SearchBar = ({ setKeyword, products }) => {
           </Typography>
           <div className="d-flex justify-content-between">
             <Typography>
-              Menor Precio <Checkbox id="menor" />
+              Menor Precio{" "}
+              <input
+                className={classes.inputFilter}
+                type="checkbox"
+                id="menor"
+                onChange={() => dispatch(filtrarProductos(MENOR))}
+              />
             </Typography>
 
             <Typography>
-              Mayor Precio <Checkbox id="mayor" />
+              Mayor Precio{" "}
+              <input
+                className={classes.inputFilter}
+                type="checkbox"
+                id="mayor"
+                onChange={() => dispatch(filtrarProductos(MAYOR))}
+              />
             </Typography>
             <Typography>
-              Nuevo <Checkbox id="nuevo" />
+              Nuevo{" "}
+              <input
+                className={classes.inputFilter}
+                type="checkbox"
+                id="nuevo"
+                onChange={() => dispatch(filtrarProductos(NUEVO))}
+              />
             </Typography>
             <Typography>
-              Usado <Checkbox id="usado" />
+              Usado{" "}
+              <input
+                className={classes.inputFilter}
+                type="checkbox"
+                id="usado"
+                onChange={() => dispatch(filtrarProductos(USADO))}
+              />
             </Typography>
           </div>
           <div className={classes.search}>
